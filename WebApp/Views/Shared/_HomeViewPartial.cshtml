@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@model string
+
+@if (!SignInManager.IsSignedIn(User))
+{
+    <center>
+        <h2 id="hello">It seems like you are not logged in.</h2>
+        <p><b>Please log in for more features</b></p>
+    </center>
+}
+else
+{
+    <center>
+        <h2 id="hello">Hello @Model !</h2>
+        <p>I hope you will enjoy this app!</p>
+    </center>
+
+}

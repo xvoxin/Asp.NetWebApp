@@ -1,0 +1,75 @@
+﻿
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+@model IEnumerable<WebApp.Models.Session>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2 id="viewName">Sessions</h2>
+
+@if ((await AuthorizationService.AuthorizeAsync(User, "Admin")).Succeeded || 
+     (await AuthorizationService.AuthorizeAsync(User, "Employee")).Succeeded)
+{
+    <p>
+        <a asp-action="Create" id="btnCreate" class="btn btn-info btn-sm">Create New</a>
+    </p>
+}
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Find: <input type="text" name="search" value="@ViewData["currentFilter"]" />
+                <input type="submit" value="Search" class="btn btn-success btn-sm" />
+                <a asp-action="Index" class="btn btn-success btn-sm">Back to Full List</a>
+            </p>
+        </div>
+    </form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ArtistID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SessionLength)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SessionDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Artist.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SessionLength)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SessionDate)
+                </td>
+                <td>
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "Admin")).Succeeded |
+                        (await AuthorizationService.AuthorizeAsync(User, "Employee")).Succeeded)
+                    {
+                        <a asp-action="Edit" id="btnEdit" class="btn btn-primary btn-xs" asp-route-id="@item.SessionID">Edit</a>
+                        <a asp-action="Details" id="btnDetails" class="btn btn-info btn-xs" asp-route-id="@item.SessionID">Details</a>
+                        <a asp-action="Delete" id="btnDelete" class="btn btn-danger btn-xs" asp-route-id="@item.SessionID">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

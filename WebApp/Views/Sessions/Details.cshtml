@@ -1,0 +1,42 @@
+﻿@model WebApp.Models.Session
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2 id="page">Details</h2>
+
+<div>
+    <h4 id="detailsPage">Session</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ArtistID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Artist.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Employee.FullName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SessionLength)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SessionLength)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SessionDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SessionDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" class="btn btn-info" asp-route-id="@Model.SessionID">Edit</a>
+    <a asp-action="Index" class="btn btn-default">Back to List</a>
+</div>

@@ -1,0 +1,48 @@
+﻿@model WebApp.Models.Artist
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Artist</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MembersCount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MembersCount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" class="btn btn-info" asp-route-id="@Model.ArtistID">Edit</a>
+    <a asp-action="Index" class="btn btn-default">Back to List</a>
+</div>
